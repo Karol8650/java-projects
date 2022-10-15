@@ -42,4 +42,26 @@ public class Board {
         }
         System.out.println();
     }
+
+    public static void printHiddenBoard() {
+        System.out.print("  ");
+        for (int i = 1; i <= ROWS; i++) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+
+        for (int i = 0; i < ROWS; i++) {
+            char c = (char) ('A' + i);
+            System.out.print(c + " ");
+            for (int j = 0; j < ROWS; j++) {
+                System.out.print("~" + " ");
+            }
+            System.out.println();
+        }
+
+        for(int i = 0; i < 10; i++) {
+            System.out.print("- ");
+        }
+        System.out.println("-");
+    }
 }
