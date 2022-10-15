@@ -22,4 +22,12 @@ public enum Ship {
     public int getCells() {
         return cells;
     }
+
+    public static int numOfShips() {
+        int count = 0;
+        for(Ship ignored : Ship.values()) {
+            count++;
+        }
+        return count;
+    }
 }
