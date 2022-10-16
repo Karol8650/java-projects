@@ -9,11 +9,13 @@ public class Game {
     private final Player player1;
     private final Player player2;
     private final Scanner scanner;
+    private boolean isWinner;
 
     public Game() {
         player1 = new Player();
         player2 = new Player();
         scanner = new Scanner(System.in);
+        isWinner = false;
     }
 
     void play() throws IOException {
@@ -26,13 +28,12 @@ public class Game {
         System.out.println("Player 2, place your ships on the game field\n");
         placeShips(player2);
 
-        int numOfShips = Ship.numOfShips();
         while (true) {
             System.out.println("Press Enter and pass the move to another player\n");
 
             System.in.read();
 
-            if (player1.numOfSunkenShips() < numOfShips) {
+            if (!isWinner) {
                 Board.printHiddenBoard();
                 takeAShot(player1, player2, "player1");
             } else break;
@@ -41,7 +42,7 @@ public class Game {
 
             System.in.read();
 
-            if (player2.numOfSunkenShips() < numOfShips) {
+            if (!isWinner) {
                 Board.printHiddenBoard();
                 takeAShot(player2, player1, "player2");
             } else break;
@@ -62,10 +63,12 @@ public class Game {
 
             do {
                 input = scanner.nextLine();
+                System.out.println();
                 try {
                     properInput = checkInput(input, ship, player);
                 } catch (IllegalArgumentException e) {
                     System.out.println(e.getMessage());
+                    System.out.println();
                 }
             } while (!properInput);
 
@@ -83,6 +86,7 @@ public class Game {
         do {
             properInput = false;
             input = scanner.nextLine();
+            System.out.println();
             try {
                 properInput = checkCoords(input);
             } catch (IllegalArgumentException e) {
@@ -104,6 +108,10 @@ public class Game {
                 player.sinkShip();
                 if (player.numOfSunkenShips() < numOfShips) {
                     System.out.println("You sank a ship!\n");
+                }
+                else {
+                    System.out.println("You sank the last ship. You won. Congratulations!");
+                    isWinner = true;
                 }
             } else {
                 System.out.println("You hit a ship!\n");
