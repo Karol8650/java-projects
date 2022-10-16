@@ -59,9 +59,9 @@ public class Board {
             System.out.println();
         }
 
-        for(int i = 0; i < 10; i++) {
-            System.out.print("- ");
+        for(int i = 0; i < 21; i++) {
+            System.out.print("-");
         }
-        System.out.println("-");
+        System.out.println();
     }
 }
